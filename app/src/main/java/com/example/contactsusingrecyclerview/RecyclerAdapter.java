@@ -7,6 +7,8 @@ import android.content.DialogInterface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -53,6 +55,8 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
         holder.imgContact.setImageResource(contactArr.get(position).img);
         holder.txtName.setText(contactArr.get(position).name);
         holder.txtNumber.setText(contactArr.get(position).number);
+
+        setAnimation(holder.itemView, position);
 
         holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -128,6 +132,12 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
     @Override
     public int getItemCount() {
         return contactArr.size();
+    }
+
+    //method to set animation
+    private void setAnimation(View viewToAnimate,int position){
+        Animation slideIn = AnimationUtils.loadAnimation(context, android.R.anim.slide_in_left);
+        viewToAnimate.startAnimation(slideIn);
     }
 
     //View holder holds the views that you want to populate with items from your lists
