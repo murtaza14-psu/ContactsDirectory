@@ -1,9 +1,14 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Base.Theme.ContactsUsingRecyclerView" parent="Theme.Material3.DayNight.NoActionBar">
+    <style name="AppTheme" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+
+        <item name="colorPrimary">#121111</item>
+        <item name="colorPrimaryDark">#FFF</item>
+        <item name="colorAccent">#FFF</item>
     </style>
+
 
     <style name="Theme.ContactsUsingRecyclerView" parent="Base.Theme.ContactsUsingRecyclerView" />
 </resources>

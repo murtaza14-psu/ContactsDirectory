@@ -2,13 +2,18 @@ package com.example.contactsusingrecyclerview;
 
 import android.app.Dialog;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
@@ -22,7 +27,11 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity {
 
     //defining array to hold contacts
-    ArrayList<Contact>contacts=new ArrayList<>();
+    ArrayList<Contact> contacts = new ArrayList<>();
+
+    //custom toolbar
+    Toolbar toolbar;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +42,22 @@ public class MainActivity extends AppCompatActivity {
         RecyclerView recyclerView = findViewById(R.id.recycler);
 
         FloatingActionButton fab_add = findViewById(R.id.fab_add);
+
+        toolbar = findViewById(R.id.toolbar);
+
+        //replacing the default action bar by custom toolbar. also enables us to use actionbar methods.
+        setSupportActionBar(toolbar);
+
+        if (getSupportActionBar() != null) {
+            //accesing toolbar as an actionbar
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setTitle("My Contacts ");
+
+        }
+
+
+
+
 
         //setting the custom adapter that we made
 
@@ -48,7 +73,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 //displaying the dialog layout as a dialog onm top of main activity
-                Dialog add_update_dialog =new Dialog(MainActivity.this);
+                Dialog add_update_dialog = new Dialog(MainActivity.this);
                 add_update_dialog.setContentView(R.layout.dialog_layout);
 
                 EditText dialog_name = add_update_dialog.findViewById(R.id.add_name);
@@ -61,19 +86,18 @@ public class MainActivity extends AppCompatActivity {
                     public void onClick(View v) {
                         String name = dialog_name.getText().toString();
                         String number = dialog_number.getText().toString();
-                        if(!name.isEmpty() && !number.isEmpty()){
+                        if (!name.isEmpty() && !number.isEmpty()) {
 
                             //adding contact in the last
                             contacts.add(new Contact(R.drawable.contact_image, name, number));
 
                             //The Adapter is informed that a new item has been added to the dataset at the specified position.
                             //The RecyclerView updates its view by inserting a new item at the position.
-                            adapter.notifyItemInserted(contacts.size()-1);
-                            recyclerView.scrollToPosition(contacts.size()-1);
+                            adapter.notifyItemInserted(contacts.size() - 1);
+                            recyclerView.scrollToPosition(contacts.size() - 1);
                             add_update_dialog.dismiss();
 
-                        }
-                        else {
+                        } else {
                             Toast.makeText(MainActivity.this, "Please Enter The desired Fields. ", Toast.LENGTH_SHORT).show();
                         }
                     }
@@ -118,11 +142,40 @@ public class MainActivity extends AppCompatActivity {
         contacts.add(new Contact(R.drawable.contact_image, "Murtaza", "03303659991"));
 
 
-
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+    }
+
+    //converting menus xml layout into views using inflater
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+
+        new MenuInflater(this).inflate(R.menu.tool_bar, menu);
+
+        return super.onCreateOptionsMenu(menu);
+    }
+
+
+    //onclick listener for the option buttons
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+
+        int itemId = item.getItemId();
+
+        if(itemId == R.id.opt_new){
+            Toast.makeText(this, "New created! ", Toast.LENGTH_SHORT).show();
+        }else if(itemId == R.id.opt_save){
+            Toast.makeText(this, "Saved! ", Toast.LENGTH_SHORT).show();
+        }else if(itemId == R.id.opt_open){
+            Toast.makeText(this, "Opened! ", Toast.LENGTH_SHORT).show();
+        }else {
+            super.onBackPressed();
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 }

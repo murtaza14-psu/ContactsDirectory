@@ -8,19 +8,38 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/appBar">
+
+    <androidx.appcompat.widget.Toolbar
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/toolbar"
+        app:titleTextColor="@color/white"
+        android:background="#ACB3E3"/>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+
+
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/recycler"/>
+        android:id="@+id/recycler"
+        android:layout_below="@+id/appBar"/>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
         android:layout_margin="50dp"
         android:id="@+id/fab_add"
         android:backgroundTint="#ACB3E3"
         android:foregroundGravity="center"
         android:src="@drawable/add_icon" />
+
+
 </RelativeLayout>

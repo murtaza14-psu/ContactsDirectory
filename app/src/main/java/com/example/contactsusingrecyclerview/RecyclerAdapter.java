@@ -93,7 +93,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
                             } else {
                                 Toast.makeText(context, "Please Enter The desired Fields.", Toast.LENGTH_SHORT).show();
                             }
-                        }
+                        }//this
                     });
                 }
             }
