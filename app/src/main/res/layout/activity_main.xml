@@ -22,24 +22,19 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
-
-
-    <androidx.recyclerview.widget.RecyclerView
+    <com.google.android.material.tabs.TabLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/recycler"
-        android:layout_below="@+id/appBar"/>
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_margin="50dp"
-        android:id="@+id/fab_add"
-        android:backgroundTint="#ACB3E3"
-        android:foregroundGravity="center"
-        android:src="@drawable/add_icon" />
+        android:id="@+id/tab"
+        android:layout_below="@+id/appBar"
+        android:background="#ACB3E3"/>
+
+    <androidx.viewpager.widget.ViewPager
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/viewpagerMain"
+        android:layout_below="@id/tab"/>
+
 
 
 </RelativeLayout>
